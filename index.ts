@@ -1,2 +1,7 @@
-let x: number = 10;
-console.log(x);
+import express from "express";
+
+const app = express();
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
+app.listen(8000, () => console.log("Server started on 8000 port!"));
