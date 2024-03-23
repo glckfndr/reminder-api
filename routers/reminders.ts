@@ -27,6 +27,19 @@ router.delete("/:id", (req, res) => {
   }
 });
 
+router.patch("/:id", (req, res) => {
+  const index = parseInt(req.params.id);
+  const el = reminders.find((el) => el.id === index);
+  if (el) {
+    const ind = reminders.indexOf(el);
+    const { isComplete } = req.body as Reminder;
+    reminders[ind].isComplete = isComplete;
+    res.json(reminders);
+  } else {
+    res.status(400).json({ error: "Patched object is not found" });
+  }
+});
+
 router.post("/", (req, res) => {
   const { title } = req.body as CreateReminderDto;
   reminders.push(new Reminder(title));
